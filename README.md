@@ -20,6 +20,10 @@ WE HAVE CREATED A DEVICE RESPONSIVE USING
 - DIRECT MESSAGE/VOICE CHAT
 - LIVE STREAM
 
+## VIDEO
+
+https://drive.google.com/file/d/1i-_9KcKggSv9eQWtcrfFsUTqE-Z3c-FP/view?usp=drive_link
+
 ## WEBSITE
 
 [LINK] (https://lausonsiyo.github.io/se_project_aroundtheus/)
