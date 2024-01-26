@@ -7,8 +7,12 @@
 @import url(../blocks/footer.css);
 
 @media screen and (max-width: 640px) {
-  .page__section {
-    max-width: calc(100% - 40px);
+  .header {
+    max-width: unset;
+  }
+
+  .page__content {
+    max-width: unset;
   }
 
   .profile {
@@ -41,6 +45,7 @@
   .profile__add-button {
     margin: 0;
     width: 100%;
+    max-width: 282px;
   }
 
   .profile__edit-button {
@@ -50,6 +55,12 @@
 
   .footer__copyright {
     font-size: 14px;
+    padding-left: 20px;
+  }
+
+  .header__logo {
+    width: 126px;
+    height: 24px;
   }
 }
 

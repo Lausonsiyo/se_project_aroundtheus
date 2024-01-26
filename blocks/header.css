@@ -1,10 +1,12 @@
 .header {
-  margin-top: 45px;
-  margin-bottom: 0;
+  margin: 45px auto 0;
   height: 74px;
   border-bottom: #545454;
   border-bottom-style: solid;
   border-bottom-width: 1px;
+  max-width: 880px;
+  width: 100%;
+  padding: 0 0 0 20px;
 }
 
 .header__logo {
