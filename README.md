@@ -1,21 +1,30 @@
 # Project 3: Around The U.S.
 
-### Overview  
+Around the us social media is the sprint 3 final project, It is an exciting and rough experience since is the first project starting from scratch, using a Figma brief we build the base for a wonderful social media where you can share your moments with the world.
+We have made a responsive platform where you can easily create your personal or business profile and post all the graphic content of your preference.
 
-* Intro  
-* Figma  
-* Images  
-  
-**Intro**
-  
-This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.  
-  
-**Figma**  
-  
-* [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)  
-  
-**Images**  
-  
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
-  
-Good luck and have fun!
+## Features
+
+WE HAVE CREATED A DEVICE RESPONSIVE USING
+
+- MEDIA QUERIES FOR MOBILE VERSION.
+
+* HTLM.
+* CCS.
+* FIGMA.
+* FLEXBOX/GRID.
+* POSITIONING.
+
+## FUTURE IMPROVEMENTS
+
+- DIRECT MESSAGE/VOICE CHAT
+- LIVE STREAM
+
+## WEBSITE
+
+[LINK] (https://lausonsiyo.github.io/se_project_aroundtheus/)
+
+## Preview
+
+![demo-image](./images/demo/demo-image1.png)
+![demo-image](./images/demo/demo-image2.png)

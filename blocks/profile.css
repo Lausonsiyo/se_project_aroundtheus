@@ -11,6 +11,7 @@
     "title button"
     "description description";
   gap: 16px 18px;
+  padding-right: 15px;
 }
 
 .profile__title {
@@ -20,6 +21,9 @@
   grid-area: title;
   margin: 0;
   font-family: Inter, Arial, Helvetica, sans-serif;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .profile__edit-button {
@@ -42,6 +46,7 @@
   width: 150px;
   border: #fff solid 2px;
   margin-left: auto;
+  transition: 0.2s ease-in-out;
 }
 
 .profile__add-button:hover {
@@ -51,11 +56,14 @@
 
 .profile__description {
   font-size: 18px;
-  line-height: 22px;
+  line-height: 1.2;
   font-weight: 400;
   grid-area: description;
   margin: 0;
   font-family: Inter, Arial, Helvetica, sans-serif;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .profile__image {

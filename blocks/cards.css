@@ -11,7 +11,7 @@
   grid-template-columns: repeat(auto-fit, 282px);
   gap: 20px 17px;
   padding: 0;
-  margin: 48px 0 0;
+  margin: 50px 0 0;
 }
 
 .card {
@@ -41,6 +41,10 @@
   font-weight: 900;
   line-height: normal;
   margin: 0;
+  max-width: 219px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .card__like-button {
