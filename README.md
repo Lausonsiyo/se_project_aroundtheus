@@ -28,3 +28,7 @@ WE HAVE CREATED A DEVICE RESPONSIVE USING
 
 ![demo-image](./images/demo/demo-image1.png)
 ![demo-image](./images/demo/demo-image2.png)
+
+## DEMO VIDEO
+
+https://drive.google.com/file/d/1i-_9KcKggSv9eQWtcrfFsUTqE-Z3c-FP/view?usp=drive_link
