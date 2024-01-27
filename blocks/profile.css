@@ -47,6 +47,7 @@
   border: #fff solid 2px;
   margin-left: auto;
   transition: 0.2s ease-in-out;
+  border-radius: 2px;
 }
 
 .profile__add-button:hover {
@@ -95,12 +96,15 @@
 
   .profile__title {
     font-size: 22px;
+    line-height: normal;
+    font-weight: 500;
   }
 
   .profile__description {
     width: 100%;
     text-align: center;
     font-size: 14px;
+    line-height: normal;
   }
 
   .profile__add-button {
