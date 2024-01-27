@@ -15,3 +15,9 @@
   max-width: calc(100% - 40px);
   margin: auto;
 }
+
+@media screen and (max-width: 640px) {
+  .page__content {
+    max-width: unset;
+  }
+}

@@ -13,3 +13,15 @@
   width: 173px;
   height: 33px;
 }
+
+@media screen and (max-width: 640px) {
+  .header {
+    max-width: unset;
+    width: auto;
+  }
+
+  .header__logo {
+    width: 126px;
+    height: 24px;
+  }
+}
