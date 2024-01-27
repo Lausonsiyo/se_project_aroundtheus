@@ -19,6 +19,7 @@
     max-width: unset;
     width: auto;
     padding-left: 20px;
+    margin: 30px auto 0;
   }
 
   .header__logo {
