@@ -38,6 +38,7 @@ const previewImageElement = document.querySelector(".modal__preview-image");
 const previewImageCloseBtn = document.querySelector(
   "#previewImage-close-button"
 );
+const previewImageTitle = document.querySelector(".modal__image-title");
 
 const addNewCardBtn = document.querySelector("#add-newCard-button");
 const addNewCardModal = document.querySelector("#add-NewCard-modal");
@@ -88,6 +89,7 @@ function getCardElement(cardData) {
 
   cardImageEl.addEventListener("click", function () {
     previewImageElement.src = cardData.link;
+    previewImageTitle.textContent = cardData.name;
     openPopup(previewImageModalWindow);
   });
 
