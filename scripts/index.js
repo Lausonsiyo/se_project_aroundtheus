@@ -29,6 +29,7 @@ const initialCards = [
 // ! ||                                    ELEMENTS                                    ||
 // ! ||--------------------------------------------------------------------------------||
 
+const likeButton = document.querySelectorAll(".card__like-button");
 const profileEditBtn = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileEditCloseBtn = document.querySelector("#edit-close-button");
