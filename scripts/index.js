@@ -139,7 +139,12 @@ profileEditForm.addEventListener("submit", handlerProfileEditSubmit);
 
 // ADD NEW CARD
 addNewCardForm.addEventListener("submit", handlerAddNewCardSubmit);
-addNewCardBtn.addEventListener("click", () => openPopup(addNewCardModal));
+addNewCardBtn.addEventListener("click", () => {
+  addNewCardLinkInput.value = "";
+  addNewCardTitleInput.value = "";
+  openPopup(addNewCardModal);
+});
+
 addNewCardCloseBtn.addEventListener("click", () => closePopup(addNewCardModal));
 
 // PREVIEW MODAL
