@@ -108,6 +108,10 @@
   transition: 0.2s ease-in-out;
 }
 
+.modal__button_disabled {
+  opacity: 0.2;
+}
+
 .modal__button:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
@@ -120,6 +124,25 @@
   top: calc(100% + 10px);
   left: 0;
   margin: 0;
+}
+
+.modal__label {
+  position: relative;
+}
+
+.modal__form-input_type_error {
+  border-bottom: solid 1px #ff0000;
+}
+
+.modal__error {
+  color: #ff0000;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 400;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  position: absolute;
+  top: calc(100% - 25px);
+  left: 0;
 }
 
 @media screen and (max-width: 640px) {

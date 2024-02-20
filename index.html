@@ -59,20 +59,35 @@
         ></button>
         <p class="modal__heading">Edit Profile</p>
         <form class="modal__form" name="profile-edit-form">
-          <input
-            id="profile-title-input"
-            class="modal__form-input"
-            placeholder="Name"
-            type="text"
-            name="title"
-          />
-          <input
-            id="profile-description-input"
-            placeholder="Description"
-            class="modal__form-input"
-            type="text"
-            name="description"
-          />
+          <label class="modal__label">
+            <input
+              id="profile-title-input"
+              class="modal__form-input"
+              placeholder="Name"
+              type="text"
+              name="title"
+              minlength="2"
+              maxlength="40"
+              required
+            />
+            <span class="modal__error" id="profile-title-input-error"></span>
+          </label>
+          <label class="modal__label">
+            <input
+              id="profile-description-input"
+              placeholder="Description"
+              class="modal__form-input"
+              type="text"
+              name="description"
+              minlength="2"
+              maxlength="200"
+              required
+            />
+            <span
+              class="modal__error"
+              id="profile-description-input-error"
+            ></span>
+          </label>
           <button class="modal__button" type="submit">Save</button>
         </form>
       </div>
@@ -87,21 +102,37 @@
         ></button>
         <p class="modal__heading">New place</p>
         <form class="modal__form" name="new-card-modal">
-          <input
-            id="new-image-title-input"
-            class="modal__form-input"
-            placeholder="Title"
-            type="text"
-            name="title"
-          />
-          <input
-            id="new-image-link-input"
-            placeholder="Image link"
-            class="modal__form-input"
-            type="text"
-            name="link"
-          />
-          <button class="modal__button" type="submit">Create</button>
+          <label class="modal__label">
+            <input
+              id="new-image-title-input"
+              class="modal__form-input"
+              placeholder="Title"
+              type="text"
+              name="title"
+              minlength="1"
+              maxlength="40"
+              required
+            />
+            <span class="modal__error" id="new-image-title-input-error"></span>
+          </label>
+          <label class="modal__label">
+            <input
+              id="new-image-link-input"
+              placeholder="Image link"
+              class="modal__form-input"
+              type="url"
+              name="link"
+              required
+            />
+            <span class="modal__error" id="new-image-link-input-error"></span>
+          </label>
+          <button
+            class="modal__button modal__button_disabled"
+            type="submit"
+            disabled
+          >
+            Create
+          </button>
         </form>
       </div>
     </div>
@@ -127,5 +158,6 @@
       </li>
     </template>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validation.js"></script>
   </body>
 </html>
