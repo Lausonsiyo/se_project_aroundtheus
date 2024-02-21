@@ -107,9 +107,9 @@ function renderCard(cardData, element) {
   element.prepend(cardElement);
 }
 
-function isEscEvent(e, action) {
-  const activeModal = document.querySelector("modal__opened");
-  if (e.key === "Escape") {
+function isEscEvent(event, action) {
+  const activeModal = document.querySelector("modal_opened");
+  if (event.key === "Escape") {
     action(activeModal);
   }
 }
@@ -117,24 +117,26 @@ function isEscEvent(e, action) {
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                 EVENT HANDLERS                                 ||
 // ! ||--------------------------------------------------------------------------------||
-function handlerProfileEditSubmit(e) {
-  e.preventDefault();
+function handlerProfileEditSubmit(event) {
+  event.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
   closePopup();
 }
 
-function handlerAddNewCardSubmit(e) {
-  e.preventDefault();
+function handlerAddNewCardSubmit(event) {
+  event.preventDefault();
   const name = addNewCardTitleInput.value;
   const link = addNewCardLinkInput.value;
   renderCard({ name, link }, cardListEl);
+  addNewCardLinkInput.value = "";
+  addNewCardTitleInput.value = "";
   closePopup();
 }
 
 function handlerEscUp(event) {
   event.preventDefault();
-  isEscEvent(event, () => closePopup());
+  isEscEvent(event, closePopup);
 }
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                 EVENT LISTENERS                                ||
@@ -153,33 +155,28 @@ profileEditForm.addEventListener("submit", handlerProfileEditSubmit);
 // ADD NEW CARD
 addNewCardForm.addEventListener("submit", handlerAddNewCardSubmit);
 addNewCardBtn.addEventListener("click", () => {
-  addNewCardLinkInput.value = "";
-  addNewCardTitleInput.value = "";
   openPopup(addNewCardModal);
 });
 
-addNewCardCloseBtn.addEventListener("click", () => closePopup());
+addNewCardCloseBtn.addEventListener("click", closePopup);
 
 // PREVIEW MODAL
 
-previewImageCloseBtn.addEventListener("click", () => closePopup());
+previewImageCloseBtn.addEventListener("click", closePopup);
 
 // CLOSING MODAL CLICK
 
-profileEditModal.addEventListener("click", (event) => {
-  if (event.target.classList.contains("modal")) {
-    closePopup();
-  }
-});
-addNewCardModal.addEventListener("click", (event) => {
-  if (event.target.classList.contains("modal")) {
-    closePopup();
-  }
-});
-previewImageModalWindow.addEventListener("click", (event) => {
-  if (event.target.classList.contains("modal")) {
-    closePopup();
-  }
+const modals = document.querySelectorAll(".modal");
+
+modals.forEach((modal) => {
+  modal.addEventListener("mousedown", (event) => {
+    if (event.target.classList.contains("modal_opened")) {
+      closePopup();
+    }
+    if (event.target.classList.contains("modal__close")) {
+      closePopup();
+    }
+  });
 });
 
 // ! ||--------------------------------------------------------------------------------||
@@ -187,5 +184,3 @@ previewImageModalWindow.addEventListener("click", (event) => {
 // ! ||--------------------------------------------------------------------------------||
 
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
-
-// we are listening the click on the ".modal", AND the event.target must ghave modal class as well
