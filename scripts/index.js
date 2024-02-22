@@ -113,7 +113,7 @@ function renderCard(cardData, element) {
 
 function isEscEvent(event, action) {
   if (event.key === "Escape") {
-    closePopup();
+    action();
   }
 }
 
