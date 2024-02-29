@@ -56,6 +56,8 @@
 
 .card__like-button_active {
   background: transparent url(../images/like-active.svg) center no-repeat;
+  background-color: pink;
+  display: none;
 }
 
 .card__like-button:hover {

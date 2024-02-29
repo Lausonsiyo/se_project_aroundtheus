@@ -1,3 +1,6 @@
+import FormValidator from "../components/FormValidation.js";
+import Card from "../components/Card.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -58,8 +61,7 @@ const addNewCardLinkInput = document.querySelector("#new-image-link-input");
 const profileEditForm = document.forms["profile-edit-form"];
 const addNewCardForm = document.forms["new-card-modal"];
 const cardListEl = document.querySelector(".cards__list");
-const cardTemplate =
-  document.querySelector("#card-template").content.firstElementChild;
+const cardTemplate = document.querySelector("#card-template");
 
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                   FUNCTIONS;                                   ||
@@ -104,11 +106,6 @@ function getCardElement(cardData) {
   cardImageEl.alt = cardData.name;
   cardTitleEl.textContent = cardData.name;
   return cardElement;
-}
-
-function renderCard(cardData, element) {
-  const cardElement = getCardElement(cardData);
-  element.prepend(cardElement);
 }
 
 function isEscEvent(event, action) {
@@ -179,3 +176,36 @@ modals.forEach((modal) => {
 // ! ||--------------------------------------------------------------------------------||
 
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
+
+// ! ||--------------------------------------------------------------------------------||
+// ! ||                                   VALIDATION;                                  ||
+// ! ||--------------------------------------------------------------------------------||
+
+const validationSettings = {
+  inputSelector: ".modal__form-input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__form-input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+const editFormElement = profileEditModal.querySelector(".modal__form");
+const addFormElement = addNewCardModal.querySelector(".modal__form");
+
+const editFormValidator = new FormValidator(
+  validationSettings,
+  editFormElement
+);
+
+const addFormValidator = new FormValidator(validationSettings, addFormElement);
+
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
+
+function renderCard(cardData, element) {
+  // const cardElement = getCardElement(cardData);
+  // console.log(cardData);
+  const card = new Card(cardData, cardTemplate);
+  element.prepend(card.getView());
+  return card.getView();
+}
