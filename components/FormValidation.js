@@ -58,17 +58,22 @@ class FormValidator {
 
   _setEventListener() {
     this._inputEls = [
-      ...this._formElement.querySelectorAll(this._inputSelector),
+      ...this._formElement.querySelectorAll(".modal__form-input"),
     ];
-    this._submitButton = this._formElement.querySelector(
-      this._submitButtonSelector
-    );
+    this._submitButton = this._formElement.querySelector(".modal__button");
     this._inputEls.forEach((inputEl) => {
       inputEl.addEventListener("input", (event) => {
         this._checkInputValidity(inputEl);
         this._toggleButtonState(this._inputEls, this._submitButton);
       });
     });
+  }
+
+  resetValidation() {
+    if (!this._submitButton.disabled) {
+      this._submitButton.classList.add(this._inactiveButtonClass);
+      this._submitButton.disabled = true;
+    }
   }
 
   enableValidation() {

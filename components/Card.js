@@ -1,7 +1,7 @@
 class Card {
-  constructor(data, cardSelector, handlePreviewPicture) {
-    this._name = data.name;
-    this._link = data.link;
+  constructor(cardData, cardSelector, handlePreviewPicture) {
+    this._name = cardData.name;
+    this._link = cardData.link;
 
     this._cardSelector = cardSelector;
     this._handlePreviewPicture = handlePreviewPicture;
@@ -12,7 +12,7 @@ class Card {
 
     this._element
       .querySelector(".card__image")
-      .addEventListener("click", () => this._handlePreviewPicture(this));
+      .addEventListener("click", () => console.log(cardData));
 
     this._likeButton.addEventListener("click", this._handleLikeIcon);
   }

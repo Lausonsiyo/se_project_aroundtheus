@@ -97,18 +97,18 @@ function handleAddNewCardSubmit(event) {
   renderCard({ name, link }, cardListEl);
   event.target.reset();
   closePopup();
+  addFormValidator.resetValidation();
+}
+function handlePreviewPicture(cardData) {
+  previewImageElement.src = cardData.link;
+  previewImageElement.alt = cardData.name;
+  previewImageTitle.textContent = cardData.name;
+  openPopup(previewImageModalWindow);
 }
 
 function handleEscUp(event) {
   event.preventDefault();
   isEscEvent(event, closePopup);
-}
-
-function handlePreviewPicture() {
-  previewImageElement.src = this._link;
-  previewImageElement.alt = this._name;
-  previewImageTitle.textContent = this._name;
-  openPopup(previewImageModalWindow);
 }
 
 // ! ||--------------------------------------------------------------------------------||
