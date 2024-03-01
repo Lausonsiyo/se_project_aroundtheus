@@ -34,20 +34,14 @@ const initialCards = [
 
 const profileEditBtn = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
-const profileEditCloseBtn = document.querySelector("#edit-close-button");
 
 const previewImageModalWindow = document.querySelector("#previewImage-modal");
 const previewImageElement = document.querySelector(".modal__preview-image");
-const previewImageCloseBtn = document.querySelector(
-  "#previewImage-close-button"
-);
+
 const previewImageTitle = document.querySelector(".modal__image-title");
 
 const addNewCardBtn = document.querySelector("#add-newCard-button");
 const addNewCardModal = document.querySelector("#add-NewCard-modal");
-const addNewCardCloseBtn = document.querySelector("#addNewCard-close-button");
-const newCardTitleInput = document.querySelector("#new-image-title-input");
-const newCardLinkInput = document.querySelector("#new-image-link-input");
 
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
@@ -80,34 +74,6 @@ function openPopup(modal) {
   document.addEventListener("keyup", handleEscUp);
 }
 
-function getCardElement(cardData) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImageEl = cardElement.querySelector(".card__image");
-  const cardTitleEl = cardElement.querySelector(".card__title");
-
-  const likeButton = cardElement.querySelector(".card__like-button");
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
-  });
-
-  const deleteButton = cardElement.querySelector(".card__delete-button");
-  deleteButton.addEventListener("click", () => {
-    cardElement.remove();
-  });
-
-  cardImageEl.addEventListener("click", function () {
-    previewImageElement.src = cardData.link;
-    previewImageElement.alt = cardData.name;
-    previewImageTitle.textContent = cardData.name;
-    openPopup(previewImageModalWindow);
-  });
-
-  cardImageEl.src = cardData.link;
-  cardImageEl.alt = cardData.name;
-  cardTitleEl.textContent = cardData.name;
-  return cardElement;
-}
-
 function isEscEvent(event, action) {
   if (event.key === "Escape") {
     action();
@@ -137,6 +103,14 @@ function handleEscUp(event) {
   event.preventDefault();
   isEscEvent(event, closePopup);
 }
+
+function handlePreviewPicture() {
+  previewImageElement.src = this._link;
+  previewImageElement.alt = this._name;
+  previewImageTitle.textContent = this._name;
+  openPopup(previewImageModalWindow);
+}
+
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                 EVENT LISTENERS                                ||
 // ! ||--------------------------------------------------------------------------------||
@@ -203,9 +177,6 @@ editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
 function renderCard(cardData, element) {
-  // const cardElement = getCardElement(cardData);
-  // console.log(cardData);
-  const card = new Card(cardData, cardTemplate);
+  const card = new Card(cardData, cardTemplate, handlePreviewPicture);
   element.prepend(card.getView());
-  return card.getView();
 }
