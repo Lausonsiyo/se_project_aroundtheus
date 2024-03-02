@@ -12,7 +12,9 @@ class Card {
 
     this._element
       .querySelector(".card__image")
-      .addEventListener("click", () => console.log(cardData));
+      .addEventListener("click", () =>
+        this._handlePreviewPicture({ name: this._name, link: this._link })
+      );
 
     this._likeButton.addEventListener("click", this._handleLikeIcon);
   }
@@ -34,11 +36,9 @@ class Card {
     this._element = this._getTemplate();
     this._likeButton = this._element.querySelector(".card__like-button");
     this._deleteButton = this._element.querySelector(".card__delete-button");
-    const cardImageEl = this._element.querySelector(".card__image");
-    const cardTitleEl = this._element.querySelector(".card__title");
-    cardImageEl.src = this._link;
-    cardImageEl.alt = this._name;
-    cardTitleEl.textContent = this._name;
+    this._cardImage = this._element.querySelector(".card__image");
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
     this._setEventListeners();
     return this._element;
   }
