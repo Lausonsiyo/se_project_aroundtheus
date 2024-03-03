@@ -1,9 +1,9 @@
 class Card {
-  constructor(cardData, cardSelector, handlePreviewPicture) {
+  constructor(cardData, cardElement, handlePreviewPicture) {
     this._name = cardData.name;
     this._link = cardData.link;
 
-    this._cardSelector = cardSelector;
+    this._cardElement = cardElement;
     this._handlePreviewPicture = handlePreviewPicture;
   }
 
@@ -29,13 +29,7 @@ class Card {
   };
 
   _getTemplate() {
-    const cardElement = document
-      .querySelector(this._cardSelector)
-      .content.querySelector(".card")
-      .cloneNode(true);
-    return cardElement;
-
-    // return this._cardSelector.content.querySelector(".card").cloneNode(true);
+    return this._cardElement.content.querySelector(".card").cloneNode(true);
   }
 
   getView() {
