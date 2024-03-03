@@ -71,8 +71,7 @@ class FormValidator {
 
   resetValidation() {
     if (!this._submitButton.disabled) {
-      this._submitButton.classList.add(this._inactiveButtonClass);
-      this._submitButton.disabled = true;
+      this._disableButton();
     }
   }
 
