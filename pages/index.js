@@ -165,10 +165,10 @@ const validationSettings = {
 
 const editFormValidator = new FormValidator(
   validationSettings,
-  editFormElement
+  profileEditForm
 );
 
-const addFormValidator = new FormValidator(validationSettings, addFormElement);
+const addFormValidator = new FormValidator(validationSettings, addNewCardForm);
 
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
@@ -177,3 +177,38 @@ function renderCard(cardData, element) {
   const card = new Card(cardData, cardTemplate, handlePreviewPicture);
   element.prepend(card.getView());
 }
+
+// ! ||--------------------------------------------------------------------------------||
+// ! ||                                  form coments                                  ||
+// ! ||--------------------------------------------------------------------------------||
+
+// const formValidators = {};
+
+// const enableValidation = (settings) => {
+//   const formList = Array.from(document.querySelectorAll(settings.formSelector));
+//   formList.forEach((formElement) => {
+//     const validator = new FormValidator(settings, formElement);
+//     const formName = formElement.getAttribute("name");
+
+//     formValidators[formName] = validator;
+//     validator.enableValidation();
+//   });
+// };
+
+// enableValidation(validationSettings);
+
+// formValidators[profileEditForm.getAttribute("name")].resetValidation();
+
+// formValidators["profile-form"].resetValidation();
+
+// CARD;
+
+// function createCard(item) {
+//   const card = new Card(cardData, cardTemplate, handlePreviewPicture);
+//   return cardElement.getView();
+// }
+
+// function renderCard(item, method) {
+//   const cardElement = createCard(item);
+//   cardList[prepend](cardElement);
+// }
