@@ -97,7 +97,7 @@ function handleAddNewCardSubmit(event) {
   renderCard({ name, link }, cardListEl);
   event.target.reset();
   closePopup();
-  // addFormValidator.resetValidation();
+  formValidators["new-card-form"].resetValidation();
 }
 
 function handlePreviewPicture(cardData) {
@@ -177,20 +177,6 @@ function renderCard(item, cardList, method = "prepend") {
   cardList[method](cardElement);
 }
 
-// const editFormValidator = new FormValidator(
-//   validationSettings,
-//   profileEditForm
-// );
-
-// const addFormValidator = new FormValidator(validationSettings, addNewCardForm);
-
-// editFormValidator.enableValidation();
-// addFormValidator.enableValidation();
-
-// ! ||--------------------------------------------------------------------------------||
-// ! ||                                  form coments                                  ||
-// ! ||--------------------------------------------------------------------------------||
-
 const formValidators = {};
 
 const enableValidation = (settings) => {
@@ -205,5 +191,3 @@ const enableValidation = (settings) => {
 };
 
 enableValidation(validationSettings);
-
-formValidators["profile-edit-form"].resetValidation();
