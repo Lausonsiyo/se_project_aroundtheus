@@ -97,7 +97,7 @@ function handleAddNewCardSubmit(event) {
   renderCard({ name, link }, cardListEl);
   event.target.reset();
   closePopup();
-  addFormValidator.resetValidation();
+  // addFormValidator.resetValidation();
 }
 
 function handlePreviewPicture(cardData) {
@@ -177,37 +177,33 @@ function renderCard(item, cardList, method = "prepend") {
   cardList[method](cardElement);
 }
 
-const editFormValidator = new FormValidator(
-  validationSettings,
-  profileEditForm
-);
+// const editFormValidator = new FormValidator(
+//   validationSettings,
+//   profileEditForm
+// );
 
-const addFormValidator = new FormValidator(validationSettings, addNewCardForm);
+// const addFormValidator = new FormValidator(validationSettings, addNewCardForm);
 
-editFormValidator.enableValidation();
-addFormValidator.enableValidation();
+// editFormValidator.enableValidation();
+// addFormValidator.enableValidation();
 
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                  form coments                                  ||
 // ! ||--------------------------------------------------------------------------------||
 
-// const formValidators = {};
+const formValidators = {};
 
-// const enableValidation = (settings) => {
-//   const formList = Array.from(document.querySelectorAll(settings.formSelector));
+const enableValidation = (settings) => {
+  const formList = Array.from(document.querySelectorAll(settings.formSelector));
 
-//   formList.forEach((formElement) => {
-//     const validator = new FormValidator(settings, formElement);
-//     const formName = formElement.getAttribute("name");
-//     formValidators[formName] = validator;
-//     validator.enableValidation();
-//   });
-// };
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(settings, formElement);
+    const formName = formElement.getAttribute("name");
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
 
-// enableValidation(validationSettings);
+enableValidation(validationSettings);
 
-// const addFormValidator = new FormValidator(validationSettings, addNewCardForm);
-
-// const profileEditValidator =
-//   formValidators[profileEditForm.name].resetValidation();
-// formValidators[addNewCardForm.name].resetValidation();
+formValidators["profile-edit-form"].resetValidation();
