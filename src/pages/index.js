@@ -1,5 +1,6 @@
 import FormValidator from "../components/FormValidation.js";
 import Card from "../components/Card.js";
+import "../pages/index.css";
 
 const initialCards = [
   {
@@ -33,15 +34,15 @@ const initialCards = [
 // ! ||--------------------------------------------------------------------------------||
 
 const profileEditBtn = document.querySelector("#profile-edit-button");
-const profileEditModal = document.querySelector("#profile-edit-modal");
+const profileEditpopup = document.querySelector("#profile-edit-popup");
 
-const previewImageModalWindow = document.querySelector("#previewImage-modal");
-const previewImageElement = document.querySelector(".modal__preview-image");
+const previewImagepopupWindow = document.querySelector("#previewImage-popup");
+const previewImageElement = document.querySelector(".popup__preview-image");
 
-const previewImageTitle = document.querySelector(".modal__image-title");
+const previewImageTitle = document.querySelector(".popup__image-title");
 
 const addNewCardBtn = document.querySelector("#add-newCard-button");
-const addNewCardModal = document.querySelector("#add-NewCard-modal");
+const addNewCardpopup = document.querySelector("#add-NewCard-popup");
 
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
@@ -61,24 +62,24 @@ const cardTemplate = document.querySelector("#card-template");
 // ! ||                                   FUNCTIONS;                                   ||
 // ! ||--------------------------------------------------------------------------------||
 
-function closePopup() {
-  const openedModal = document.querySelector(".modal_opened");
-  if (openedModal) {
-    openedModal.classList.remove("modal_opened");
-    document.removeEventListener("keyup", handleEscUp);
-  }
-}
+// function closePopup() {
+//   const openedpopup = document.querySelector(".popup_opened");
+//   if (openedpopup) {
+//     openedpopup.classList.remove("popup_opened");
+//     document.removeEventListener("keyup", handleEscUp);
+//   }
+// }
 
-function openPopup(modal) {
-  modal.classList.add("modal_opened");
-  document.addEventListener("keyup", handleEscUp);
-}
+// function openPopup(popup) {
+//   popup.classList.add("popup_opened");
+//   document.addEventListener("keyup", handleEscUp);
+// }
 
-function isEscEvent(event, action) {
-  if (event.key === "Escape") {
-    action();
-  }
-}
+// function isEscEvent(event, action) {
+//   if (event.key === "Escape") {
+//     action();
+//   }
+// }
 
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                 EVENT HANDLERS                                 ||
@@ -104,7 +105,7 @@ function handlePreviewPicture(cardData) {
   previewImageElement.src = cardData.link;
   previewImageElement.alt = cardData.name;
   previewImageTitle.textContent = cardData.name;
-  openPopup(previewImageModalWindow);
+  openPopup(previewImagepopupWindow);
 }
 
 function handleEscUp(event) {
@@ -121,30 +122,30 @@ function handleEscUp(event) {
 profileEditBtn.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
-  openPopup(profileEditModal);
+  openPopup(profileEditpopup);
 });
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 // ADD NEW CARD
 addNewCardForm.addEventListener("submit", handleAddNewCardSubmit);
 addNewCardBtn.addEventListener("click", () => {
-  openPopup(addNewCardModal);
+  openPopup(addNewCardpopup);
 });
 
-// CLOSING MODAL
+// CLOSING popup
 
-const modals = document.querySelectorAll(".modal");
+const popups = document.querySelectorAll(".popup");
 
-modals.forEach((modal) => {
-  modal.addEventListener("mousedown", (event) => {
-    if (event.target.classList.contains("modal_opened")) {
-      closePopup();
-    }
-    if (event.target.classList.contains("modal__close")) {
-      closePopup();
-    }
-  });
-});
+// popups.forEach((popup) => {
+//   popup.addEventListener("mousedown", (event) => {
+//     if (event.target.classList.contains("popup_opened")) {
+//       closePopup();
+//     }
+//     if (event.target.classList.contains("popup__close")) {
+//       closePopup();
+//     }
+//   });
+// });
 
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                      LOOP;                                     ||
@@ -157,12 +158,12 @@ initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
 // ! ||--------------------------------------------------------------------------------||
 
 const validationSettings = {
-  inputSelector: ".modal__form-input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__form-input_type_error",
-  errorClass: "modal__error_visible",
-  formSelector: ".modal__form",
+  inputSelector: ".popup__form-input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__form-input_type_error",
+  errorClass: "popup__error_visible",
+  formSelector: ".popup__form",
 };
 
 //CARD

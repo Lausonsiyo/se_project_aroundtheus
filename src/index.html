@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Araund the U.S</title>
-    <link rel="stylesheet" href="./pages/index.css" />
     <link rel="shortcut icon" href="./favicon.ico" />
     <meta name="description" content="Photo Blog" />
     <meta name="keywords" content="photo, social, blog" />
@@ -15,7 +14,7 @@
       <header class="header">
         <img
           class="header__logo"
-          src="./images/logo-white.svg"
+          src="<%= require('./images/logo-white.svg')%>"
           alt="araund the us white logo"
         />
       </header>
@@ -23,7 +22,7 @@
         <section class="profile page__section">
           <img
             class="profile__image"
-            src="./images/jacques-cousteau.jpg"
+            src="<%= require('./images/jacques-cousteau.jpg')%>"
             alt="avatar"
           />
           <div class="profile__info">
@@ -49,20 +48,20 @@
         <p class="footer__copyright">&copy;2022 Around The U.S</p>
       </footer>
     </div>
-    <!-- Edit Modal -->
-    <div class="modal" id="profile-edit-modal">
-      <div class="modal__container">
+    <!-- Edit popup -->
+    <div class="popup" id="profile-edit-popup">
+      <div class="popup__container">
         <button
-          class="modal__close"
+          class="popup__close"
           id="edit-close-button"
           type="button"
         ></button>
-        <p class="modal__heading">Edit Profile</p>
-        <form class="modal__form" name="profile-edit-form">
-          <label class="modal__label">
+        <p class="popup__heading">Edit Profile</p>
+        <form class="popup__form" name="profile-edit-form">
+          <label class="popup__label">
             <input
               id="profile-title-input"
-              class="modal__form-input"
+              class="popup__form-input"
               placeholder="Name"
               type="text"
               name="title"
@@ -70,13 +69,13 @@
               maxlength="40"
               required
             />
-            <span class="modal__error" id="profile-title-input-error"></span>
+            <span class="popup__error" id="profile-title-input-error"></span>
           </label>
-          <label class="modal__label">
+          <label class="popup__label">
             <input
               id="profile-description-input"
               placeholder="Description"
-              class="modal__form-input"
+              class="popup__form-input"
               type="text"
               name="description"
               minlength="2"
@@ -84,28 +83,28 @@
               required
             />
             <span
-              class="modal__error"
+              class="popup__error"
               id="profile-description-input-error"
             ></span>
           </label>
-          <button class="modal__button" type="submit">Save</button>
+          <button class="popup__button" type="submit">Save</button>
         </form>
       </div>
     </div>
-    <!-- Add New Card Modal -->
-    <div class="modal" id="add-NewCard-modal">
-      <div class="modal__container">
+    <!-- Add New Card popup -->
+    <div class="popup" id="add-NewCard-popup">
+      <div class="popup__container">
         <button
-          class="modal__close"
+          class="popup__close"
           id="addNewCard-close-button"
           type="button"
         ></button>
-        <p class="modal__heading">New place</p>
-        <form class="modal__form" name="new-card-form">
-          <label class="modal__label">
+        <p class="popup__heading">New place</p>
+        <form class="popup__form" name="new-card-form">
+          <label class="popup__label">
             <input
               id="new-image-title-input"
-              class="modal__form-input"
+              class="popup__form-input"
               placeholder="Title"
               type="text"
               name="title"
@@ -113,21 +112,21 @@
               maxlength="40"
               required
             />
-            <span class="modal__error" id="new-image-title-input-error"></span>
+            <span class="popup__error" id="new-image-title-input-error"></span>
           </label>
-          <label class="modal__label">
+          <label class="popup__label">
             <input
               id="new-image-link-input"
               placeholder="Image link"
-              class="modal__form-input"
+              class="popup__form-input"
               type="url"
               name="link"
               required
             />
-            <span class="modal__error" id="new-image-link-input-error"></span>
+            <span class="popup__error" id="new-image-link-input-error"></span>
           </label>
           <button
-            class="modal__button modal__button_disabled"
+            class="popup__button popup__button_disabled"
             type="submit"
             disabled
           >
@@ -136,15 +135,15 @@
         </form>
       </div>
     </div>
-    <div class="modal" id="previewImage-modal">
-      <div class="modal__container modal__container_type_preview">
+    <div class="popup" id="previewImage-popup">
+      <div class="popup__container popup__container_type_preview">
         <button
-          class="modal__close modal__close_type_preview-image"
+          class="popup__close popup__close_type_preview-image"
           id="previewImage-close-button"
           type="button"
         ></button>
-        <p class="modal__image-title"></p>
-        <img src="" alt="" class="modal__preview-image" />
+        <p class="popup__image-title"></p>
+        <img src="" alt="" class="popup__preview-image" />
       </div>
     </div>
     <template id="card-template">
@@ -157,6 +156,5 @@
         </div>
       </li>
     </template>
-    <script type="module" src="./pages/index.js"></script>
   </body>
 </html>
