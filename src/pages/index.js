@@ -30,18 +30,18 @@ import {
 // ! ||                                   FUNCTIONS;                                   ||
 // ! ||--------------------------------------------------------------------------------||
 
-function closePopup() {
-  const openedpopup = document.querySelector(".popup_opened");
-  if (openedpopup) {
-    openedpopup.classList.remove("popup_opened");
-    document.removeEventListener("keyup", handleEscUp);
-  }
-}
+// function closePopup() {
+//   const openedpopup = document.querySelector(".popup_opened");
+//   if (openedpopup) {
+//     openedpopup.classList.remove("popup_opened");
+//     document.removeEventListener("keyup", handleEscUp);
+//   }
+// }
 
-function openPopup(popup) {
-  popup.classList.add("popup_opened");
-  document.addEventListener("keyup", handleEscUp);
-}
+// function openPopup(popup) {
+//   popup.classList.add("popup_opened");
+//   document.addEventListener("keyup", handleEscUp);
+// }
 
 // function isEscEvent(event, action) {
 //   if (event.key === "Escape") {
@@ -65,15 +65,22 @@ function handleProfileEditSubmit(inputValues) {
   editProfilePopupForm.close();
 }
 
-function handleAddNewCardSubmit(event) {
-  event.preventDefault();
-  const name = addNewCardTitleInput.value;
-  const link = addNewCardLinkInput.value;
-  renderCard({ name, link }, cardListEl);
-  event.target.reset();
-  closePopup();
+function handleAddNewCardSubmit(data) {
+  sectionCard.addItem(createCard({ title: data.title, link: data.link }));
+  addNewCardPopupForm.close();
   formValidators["new-card-form"].resetValidation();
 }
+
+function handlePreviewPicture(card) {
+  previewImagePopup.open(card);
+}
+// function handleAddNewCardSubmit(event) {
+//   const name = addNewCardTitleInput.value;
+//   const link = addNewCardLinkInput.value;
+//   renderCard({ name, link }, cardListEl);
+//   addNewCardPopupForm.close();
+//   formValidators["new-card-form"].resetValidation();
+// }
 
 // function handlePreviewPicture(cardData) {
 //   previewImageElement.src = cardData.link;
@@ -81,10 +88,6 @@ function handleAddNewCardSubmit(event) {
 //   previewImageTitle.textContent = cardData.name;
 //   openPopup(previewImagepopupWindow);
 // }
-
-function handlePreviewPicture(card) {
-  previewImagePopup.open(card);
-}
 
 // function handleEscUp(event) {
 //   event.preventDefault();
@@ -139,7 +142,7 @@ addNewCardBtn.addEventListener("click", () => {
 // ! ||                                      LOOP;                                     ||
 // ! ||--------------------------------------------------------------------------------||
 
-initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
+// initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
 
 //RENDER CARD FUNCTION
 
@@ -148,10 +151,10 @@ function createCard(item) {
   return card.getView();
 }
 
-function renderCard(item, cardList, method = "prepend") {
-  const cardElement = createCard(item);
-  cardList[method](cardElement);
-}
+// function renderCard(item, cardList, method = "prepend") {
+//   const cardElement = createCard(item);
+//   cardList[method](cardElement);
+// }
 
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                   VALIDATION;                                  ||
