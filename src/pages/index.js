@@ -30,13 +30,13 @@ import {
 // ! ||                                   FUNCTIONS;                                   ||
 // ! ||--------------------------------------------------------------------------------||
 
-// function closePopup() {
-//   const openedpopup = document.querySelector(".popup_opened");
-//   if (openedpopup) {
-//     openedpopup.classList.remove("popup_opened");
-//     document.removeEventListener("keyup", handleEscUp);
-//   }
-// }
+function closePopup() {
+  const openedpopup = document.querySelector(".popup_opened");
+  if (openedpopup) {
+    openedpopup.classList.remove("popup_opened");
+    document.removeEventListener("keyup", handleEscUp);
+  }
+}
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
@@ -52,11 +52,17 @@ function openPopup(popup) {
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                 EVENT HANDLERS                                 ||
 // ! ||--------------------------------------------------------------------------------||
-function handleProfileEditSubmit(event) {
-  event.preventDefault();
-  profileTitle.textContent = profileTitleInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
-  closePopup();
+// function handleProfileEditSubmit(event) {
+//   event.preventDefault();
+//   profileTitle.textContent = profileTitleInput.value;
+//   profileDescription.textContent = profileDescriptionInput.value;
+//   closePopup();
+// }
+
+function handleProfileEditSubmit(inputValues) {
+  userInfo.setUserInfo(inputValues);
+  formValidators["profile-edit-form"].resetValidation();
+  editProfilePopupForm.close();
 }
 
 function handleAddNewCardSubmit(event) {
@@ -69,11 +75,15 @@ function handleAddNewCardSubmit(event) {
   formValidators["new-card-form"].resetValidation();
 }
 
-function handlePreviewPicture(cardData) {
-  previewImageElement.src = cardData.link;
-  previewImageElement.alt = cardData.name;
-  previewImageTitle.textContent = cardData.name;
-  openPopup(previewImagepopupWindow);
+// function handlePreviewPicture(cardData) {
+//   previewImageElement.src = cardData.link;
+//   previewImageElement.alt = cardData.name;
+//   previewImageTitle.textContent = cardData.name;
+//   openPopup(previewImagepopupWindow);
+// }
+
+function handlePreviewPicture(card) {
+  previewImagePopup.open(card);
 }
 
 // function handleEscUp(event) {
@@ -87,22 +97,32 @@ function handlePreviewPicture(cardData) {
 
 // PROFILE EDIT
 
+// profileEditBtn.addEventListener("click", () => {
+//   profileTitleInput.value = profileTitle.textContent;
+//   profileDescriptionInput.value = profileDescription.textContent;
+//   openPopup(profileEditpopup);
+// });
+// profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+
 profileEditBtn.addEventListener("click", () => {
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
-  openPopup(profileEditpopup);
+  const userInformation = userInfo.getUserInfo();
+  profileTitleInput.value = userInformation.userName;
+  profileDescriptionInput.value = userInformation.userDescription;
+  editProfilePopupForm.open();
 });
-profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 // ADD NEW CARD
-addNewCardForm.addEventListener("submit", handleAddNewCardSubmit);
+// addNewCardForm.addEventListener("submit", handleAddNewCardSubmit);
 addNewCardBtn.addEventListener("click", () => {
-  openPopup(addNewCardpopup);
+  addNewCardPopupForm.open();
 });
+// addNewCardBtn.addEventListener("click", () => {
+//   openPopup(addNewCardpopup);
+// });
 
 // CLOSING popup
 
-const popups = document.querySelectorAll(".popup");
+// const popups = document.querySelectorAll(".popup");
 
 // popups.forEach((popup) => {
 //   popup.addEventListener("mousedown", (event) => {
@@ -181,3 +201,15 @@ const editProfilePopupForm = new PopupWithForm(
   handleProfileEditSubmit
 );
 editProfilePopupForm.setEventListeners();
+
+const previewImagePopup = new PopupWithImage("#previewImage-popup");
+previewImagePopup.setEventListeners();
+
+// ! ||--------------------------------------------------------------------------------||
+// ! ||                               INSTANCE USER INFO                               ||
+// ! ||--------------------------------------------------------------------------------||
+
+const userInfo = new UserInfo({
+  userNameSelector: profileTitle,
+  userDescriptionSelector: profileDescription,
+});
