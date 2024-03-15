@@ -44,7 +44,6 @@ function createCard(item) {
 
 function handleProfileEditSubmit(data) {
   userInfo.setUserInfo(data);
-  formValidators["profile-edit-form"].resetValidation();
   editProfilePopupForm.close();
 }
 
@@ -53,7 +52,6 @@ function handleProfileEditSubmit(data) {
 function handleAddNewCardSubmit(data) {
   sectionCard.addItem(createCard({ name: data.title, link: data.link }));
   addNewCardPopupForm.close();
-  formValidators["new-card-form"].resetValidation();
 }
 
 // PREVIEW PICTURE HANDLER
@@ -72,12 +70,14 @@ profileEditBtn.addEventListener("click", () => {
   const userInformation = userInfo.getUserInfo();
   profileTitleInput.value = userInformation.userName;
   profileDescriptionInput.value = userInformation.userDescription;
+  formValidators["profile-edit-form"].resetValidation();
   editProfilePopupForm.open();
 });
 
 // ADD NEW CARD LISTENER
 
 addNewCardBtn.addEventListener("click", () => {
+  formValidators["new-card-form"].resetValidation();
   addNewCardPopupForm.open();
 });
 
