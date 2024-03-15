@@ -26,39 +26,21 @@ import {
   addNewCardForm,
   cardTemplate,
 } from "../utils/constants.js";
-import { data } from "autoprefixer";
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                   FUNCTIONS;                                   ||
 // ! ||--------------------------------------------------------------------------------||
 
-// function closePopup() {
-//   const openedpopup = document.querySelector(".popup_opened");
-//   if (openedpopup) {
-//     openedpopup.classList.remove("popup_opened");
-//     document.removeEventListener("keyup", handleEscUp);
-//   }
-// }
+//RENDER CARD FUNCTION
 
-// function openPopup(popup) {
-//   popup.classList.add("popup_opened");
-//   document.addEventListener("keyup", handleEscUp);
-// }
-
-// function isEscEvent(event, action) {
-//   if (event.key === "Escape") {
-//     action();
-//   }
-// }
-
+function createCard(item) {
+  const card = new Card(item, cardTemplate, handlePreviewPicture);
+  return card.getView();
+}
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                 EVENT HANDLERS                                 ||
 // ! ||--------------------------------------------------------------------------------||
-// function handleProfileEditSubmit(event) {
-//   event.preventDefault();
-//   profileTitle.textContent = profileTitleInput.value;
-//   profileDescription.textContent = profileDescriptionInput.value;
-//   closePopup();
-// }
+
+// PROFILE EDIT HANDLER
 
 function handleProfileEditSubmit(data) {
   userInfo.setUserInfo(data);
@@ -66,47 +48,25 @@ function handleProfileEditSubmit(data) {
   editProfilePopupForm.close();
 }
 
+// ADD NEW CARD HANDLER
+
 function handleAddNewCardSubmit(data) {
   sectionCard.addItem(createCard({ name: data.title, link: data.link }));
   addNewCardPopupForm.close();
   formValidators["new-card-form"].resetValidation();
 }
 
+// PREVIEW PICTURE HANDLER
+
 function handlePreviewPicture(card) {
   previewImagePopup.open(card);
 }
-// function handleAddNewCardSubmit(event) {
-//   const name = addNewCardTitleInput.value;
-//   const link = addNewCardLinkInput.value;
-//   renderCard({ name, link }, cardListEl);
-//   addNewCardPopupForm.close();
-//   formValidators["new-card-form"].resetValidation();
-// }
-
-// function handlePreviewPicture(cardData) {
-//   previewImageElement.src = cardData.link;
-//   previewImageElement.alt = cardData.name;
-//   previewImageTitle.textContent = cardData.name;
-//   openPopup(previewImagepopupWindow);
-// }
-
-// function handleEscUp(event) {
-//   event.preventDefault();
-//   isEscEvent(event, closePopup);
-// }
 
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                 EVENT LISTENERS                                ||
 // ! ||--------------------------------------------------------------------------------||
 
-// PROFILE EDIT
-
-// profileEditBtn.addEventListener("click", () => {
-//   profileTitleInput.value = profileTitle.textContent;
-//   profileDescriptionInput.value = profileDescription.textContent;
-//   openPopup(profileEditpopup);
-// });
-// profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+// PROFILE EDIT LISTENER
 
 profileEditBtn.addEventListener("click", () => {
   const userInformation = userInfo.getUserInfo();
@@ -115,47 +75,11 @@ profileEditBtn.addEventListener("click", () => {
   editProfilePopupForm.open();
 });
 
-// ADD NEW CARD
-// addNewCardForm.addEventListener("submit", handleAddNewCardSubmit);
+// ADD NEW CARD LISTENER
+
 addNewCardBtn.addEventListener("click", () => {
   addNewCardPopupForm.open();
 });
-// addNewCardBtn.addEventListener("click", () => {
-//   openPopup(addNewCardpopup);
-// });
-
-// CLOSING popup
-
-// const popups = document.querySelectorAll(".popup");
-
-// popups.forEach((popup) => {
-//   popup.addEventListener("mousedown", (event) => {
-//     if (event.target.classList.contains("popup_opened")) {
-//       close();
-//     }
-//     if (event.target.classList.contains("popup__close")) {
-//       close();
-//     }
-//   });
-// });
-
-// ! ||--------------------------------------------------------------------------------||
-// ! ||                                      LOOP;                                     ||
-// ! ||--------------------------------------------------------------------------------||
-
-// initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
-
-//RENDER CARD FUNCTION
-
-function createCard(item) {
-  const card = new Card(item, cardTemplate, handlePreviewPicture);
-  return card.getView();
-}
-
-// function renderCard(item, cardList, method = "prepend") {
-//   const cardElement = createCard(item);
-//   cardList[method](cardElement);
-// }
 
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                   VALIDATION;                                  ||
