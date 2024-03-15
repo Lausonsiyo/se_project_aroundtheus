@@ -26,6 +26,7 @@ import {
   addNewCardForm,
   cardTemplate,
 } from "../utils/constants.js";
+import { data } from "autoprefixer";
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                   FUNCTIONS;                                   ||
 // ! ||--------------------------------------------------------------------------------||
@@ -59,14 +60,14 @@ import {
 //   closePopup();
 // }
 
-function handleProfileEditSubmit(inputValues) {
-  userInfo.setUserInfo(inputValues);
+function handleProfileEditSubmit(data) {
+  userInfo.setUserInfo(data);
   formValidators["profile-edit-form"].resetValidation();
   editProfilePopupForm.close();
 }
 
 function handleAddNewCardSubmit(data) {
-  sectionCard.addItem(createCard({ title: data.title, link: data.link }));
+  sectionCard.addItem(createCard({ name: data.title, link: data.link }));
   addNewCardPopupForm.close();
   formValidators["new-card-form"].resetValidation();
 }
@@ -130,10 +131,10 @@ addNewCardBtn.addEventListener("click", () => {
 // popups.forEach((popup) => {
 //   popup.addEventListener("mousedown", (event) => {
 //     if (event.target.classList.contains("popup_opened")) {
-//       closePopup();
+//       close();
 //     }
 //     if (event.target.classList.contains("popup__close")) {
-//       closePopup();
+//       close();
 //     }
 //   });
 // });
