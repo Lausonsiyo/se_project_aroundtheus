@@ -5,6 +5,7 @@ import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api.js";
 import {
   initialCards,
   validationSettings,
@@ -42,16 +43,49 @@ function createCard(item) {
 
 // PROFILE EDIT HANDLER
 
-function handleProfileEditSubmit(data) {
-  userInfo.setUserInfo(data);
-  editProfilePopupForm.close();
+// function handleProfileEditSubmit(data) {
+//   userInfo.setUserInfo(data);
+//   editProfilePopupForm.close();
+// }
+
+function handleProfileEditSubmit({ name, description }) {
+  editProfilePopupForm.setLoading(true);
+  api
+    .updateUserInfo({ name, description })
+    .then((res) => {
+      userInfo.setUserInfo(res);
+      editProfilePopupForm.close();
+    })
+    .catch((err) => {
+      alert(`Error! ${err}`);
+    })
+    .finally(() => editProfilePopupForm.setLoading(false));
 }
+
+// function handleProfileEditSubmit(data) {
+//   editProfilePopupForm.setLoading(true);
+//   api.updateUserInfo(data).then(console.log(res));
+// }
 
 // ADD NEW CARD HANDLER
 
+// function handleAddNewCardSubmit(data) {
+//   sectionCard.addItem(createCard({ name: data.title, link: data.link }));
+//   addNewCardPopupForm.close();
+// }
+
 function handleAddNewCardSubmit(data) {
-  sectionCard.addItem(createCard({ name: data.title, link: data.link }));
-  addNewCardPopupForm.close();
+  addNewCardPopupForm.setLoading(true);
+  api
+    .addCard(data)
+    .then((card) => {
+      sectionCard.addItem(card);
+      addNewCardPopupForm.close();
+    })
+    .catch((err) => {
+      alert(`Error! ${err}`);
+    })
+    .finally(() => editProfilePopupForm.setLoading(false));
 }
 
 // PREVIEW PICTURE HANDLER
@@ -140,4 +174,40 @@ previewImagePopup.setEventListeners();
 const userInfo = new UserInfo({
   userNameSelector: profileTitle,
   userDescriptionSelector: profileDescription,
+  // avatarSelector:
 });
+
+// ! ||--------------------------------------------------------------------------------||
+// ! ||                                      API'S                                     ||
+// ! ||--------------------------------------------------------------------------------||
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "4ddc62a6-2321-4363-b6de-23e72ad66920",
+    "Content-Type": "application/json",
+  },
+});
+
+api
+  .getInitialCards()
+  .then((cards) => {
+    sectionCard.setItems(cards);
+    sectionCard.renderItems();
+  })
+  .catch((err) => {
+    alert(`Error! ${err}`);
+  });
+
+api
+  .getUserInfo()
+  .then((info) => {
+    userInfo.setUserInfo({
+      userName: info.name,
+      userDescription: info.about,
+    });
+    userInfo.setAvatar(info.avatar);
+  })
+  .catch((err) => {
+    alert(`Error! ${err}`);
+  });

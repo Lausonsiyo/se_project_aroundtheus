@@ -20,11 +20,20 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
-            class="profile__image"
-            src="<%= require('./images/jacques-cousteau.jpg')%>"
-            alt="avatar"
-          />
+          <div class="profile__avatar_container">
+            <img
+              class="profile__image"
+              src="<%= require('./images/jacques-cousteau.jpg')%>"
+              alt="avatar"
+              id="avatar-image"
+            />
+            <img
+              class="profile__image_edit"
+              src="<%= require('./images/pencil.svg')%>"
+              alt="avatar edit pencil"
+              id="edit-avatar-image"
+            />
+          </div>
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteau</h1>
             <button
@@ -48,7 +57,7 @@
         <p class="footer__copyright">&copy;2022 Around The U.S</p>
       </footer>
     </div>
-    <!-- Edit popup -->
+    <!-- EDIT PROFILE POPPUP -->
     <div class="popup" id="profile-edit-popup">
       <div class="popup__container">
         <button
@@ -91,7 +100,7 @@
         </form>
       </div>
     </div>
-    <!-- Add New Card popup -->
+    <!-- ADD NEW CARD POPUP -->
     <div class="popup" id="add-NewCard-popup">
       <div class="popup__container">
         <button
@@ -135,6 +144,7 @@
         </form>
       </div>
     </div>
+    <!-- PREVIEW IMAGE POPUP -->
     <div class="popup" id="previewImage-popup">
       <div class="popup__container popup__container_type_preview">
         <button
@@ -146,6 +156,7 @@
         <img src="" alt="" class="popup__preview-image" />
       </div>
     </div>
+    <!-- CARD TEMPLATE -->
     <template id="card-template">
       <li class="card">
         <img class="card__image" src="" alt="" />
@@ -156,5 +167,42 @@
         </div>
       </li>
     </template>
+    <!-- DELETE CONFIRMATION POPUP -->
+    <div class="popup" id="deleteConfirm-popup">
+      <div class="popup__container">
+        <button
+          class="popup__close"
+          id="deleteConfirm-close-button"
+          type="button"
+        ></button>
+        <form name="deleteConfirm-form" class="popup__form">
+          <p class="popup__heading">Delete Image?</p>
+          <button class="popup__button" type="submit" disabled>YES</button>
+        </form>
+      </div>
+    </div>
+    <!-- EDIT AVATAR POPUP -->
+    <div class="popup" id="edit-avatar-popup">
+      <div class="popup__container">
+        <button
+          class="popup__close"
+          id="edit-avatar-close-button"
+          type="button"
+        ></button>
+        <form name="edita-avatar-form" class="popup__form">
+          <p class="popup__heading">Change profile picture</p>
+          <input
+            id="new-avatar-link-input"
+            placeholder="Image link"
+            class="popup__form-input"
+            type="url"
+            name="link"
+            required
+          />
+          <span class="popup__error" id="new-image-title-input-error"></span>
+          <button class="popup__button" type="submit" disabled>Save</button>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
