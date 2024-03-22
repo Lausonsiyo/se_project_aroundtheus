@@ -56,7 +56,7 @@ function handleUpdateAvatarSubmit(input) {
   api
     .updateAvatar(input.link)
     .then((res) => {
-      userInfo.setAvatar(res);
+      userInfo.setAvatar(res.avatar);
       updateAvatarPopupForm.close();
     })
     .catch((err) => {

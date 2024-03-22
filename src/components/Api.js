@@ -70,11 +70,4 @@ export default class Api {
       headers: this._headers,
     }).then((res) => this._checkResponse(res));
   }
-
-  removeLike(id) {
-    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-      method: "DELETE",
-      headers: this._headers,
-    }).then((res) => this._checkResponse(res));
-  }
 }
