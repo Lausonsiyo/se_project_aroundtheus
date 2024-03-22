@@ -113,8 +113,8 @@ function handleDeleteCardClick(card) {
     api
       .deleteCard(card._id)
       .then((result) => {
-        card.handleDeleteCard(result);
         deleteConfirmationPopup.close();
+        card.handleDeleteCard(result);
       })
       .catch((err) => {
         alert(`Error! ${err}`);
@@ -126,28 +126,6 @@ function handleDeleteCardClick(card) {
 }
 
 // LIKE HANDLER
-
-// function handleLikeButtonClick(card) {
-//   if (card.isLiked) {
-//     return api
-//       .removeLike(card._id)
-//       .then((res) => {
-//         card.isLiked(res.isLiked);
-//       })
-//       .catch((err) => {
-//         alert(`Error! ${err}`);
-//       });
-//   } else {
-//     api
-//       .setLike(card._id)
-//       .then((res) => {
-//         card.isLiked(res.isLiked);
-//       })
-//       .catch((err) => {
-//         alert(`Error! ${err}`);
-//       });
-//   }
-// }
 
 function handleLikeButtonClick(card) {
   api
