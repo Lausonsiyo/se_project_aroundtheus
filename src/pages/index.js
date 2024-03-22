@@ -6,6 +6,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
+import DeleteConfirmation from "../components/DeleteConfirmation.js";
 import {
   initialCards,
   validationSettings,
@@ -20,12 +21,13 @@ import {
   profileTitle,
   profileDescription,
   cardListEl,
+  cardTemplate,
   previewImagepopupWindow,
   previewImageElement,
   previewImageTitle,
   profileEditForm,
   addNewCardForm,
-  cardTemplate,
+  avatarEditpencil,
 } from "../utils/constants.js";
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                   FUNCTIONS;                                   ||
@@ -34,24 +36,41 @@ import {
 //RENDER CARD FUNCTION
 
 function createCard(item) {
-  const card = new Card(item, cardTemplate, handlePreviewPicture);
+  const card = new Card(
+    item,
+    cardTemplate,
+    handlePreviewPicture,
+    handleDeleteCardClick,
+    handleLikeButtonClick
+  );
   return card.getView();
 }
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                 EVENT HANDLERS                                 ||
 // ! ||--------------------------------------------------------------------------------||
 
+// EDIT AVATAR HANDLER
+
+function handleUpdateAvatarSubmit(input) {
+  updateAvatarPopupForm.setLoading(true);
+  api
+    .updateAvatar(input.link)
+    .then((res) => {
+      userInfo.setAvatar(res);
+      updateAvatarPopupForm.close();
+    })
+    .catch((err) => {
+      alert(`Error! ${err}`);
+    })
+    .finally(() => editProfilePopupForm.setLoading(false));
+}
+
 // PROFILE EDIT HANDLER
 
-// function handleProfileEditSubmit(data) {
-//   userInfo.setUserInfo(data);
-//   editProfilePopupForm.close();
-// }
-
-function handleProfileEditSubmit({ name, description }) {
+function handleProfileEditSubmit(data) {
   editProfilePopupForm.setLoading(true);
   api
-    .updateUserInfo({ name, description })
+    .updateUserInfo(data)
     .then((res) => {
       userInfo.setUserInfo(res);
       editProfilePopupForm.close();
@@ -62,24 +81,15 @@ function handleProfileEditSubmit({ name, description }) {
     .finally(() => editProfilePopupForm.setLoading(false));
 }
 
-// function handleProfileEditSubmit(data) {
-//   editProfilePopupForm.setLoading(true);
-//   api.updateUserInfo(data).then(console.log(res));
-// }
-
 // ADD NEW CARD HANDLER
-
-// function handleAddNewCardSubmit(data) {
-//   sectionCard.addItem(createCard({ name: data.title, link: data.link }));
-//   addNewCardPopupForm.close();
-// }
 
 function handleAddNewCardSubmit(data) {
   addNewCardPopupForm.setLoading(true);
   api
     .addCard(data)
     .then((card) => {
-      sectionCard.addItem(card);
+      const newCard = createCard(card);
+      sectionCard.addItem(newCard);
       addNewCardPopupForm.close();
     })
     .catch((err) => {
@@ -94,6 +104,61 @@ function handlePreviewPicture(card) {
   previewImagePopup.open(card);
 }
 
+// DELETE CARD HANDLER
+
+function handleDeleteCardClick(card) {
+  deleteConfirmationPopup.open();
+  deleteConfirmationPopup.setDeleteConfirm(() => {
+    deleteConfirmationPopup.setDeleteLoading(true);
+    api
+      .deleteCard(card._id)
+      .then((result) => {
+        card.handleDeleteCard(result);
+        deleteConfirmationPopup.close();
+      })
+      .catch((err) => {
+        alert(`Error! ${err}`);
+      })
+      .finally(() => {
+        deleteConfirmationPopup.setDeleteLoading(false);
+      });
+  });
+}
+
+// LIKE HANDLER
+
+// function handleLikeButtonClick(card) {
+//   if (card.isLiked) {
+//     return api
+//       .removeLike(card._id)
+//       .then((res) => {
+//         card.isLiked(res.isLiked);
+//       })
+//       .catch((err) => {
+//         alert(`Error! ${err}`);
+//       });
+//   } else {
+//     api
+//       .setLike(card._id)
+//       .then((res) => {
+//         card.isLiked(res.isLiked);
+//       })
+//       .catch((err) => {
+//         alert(`Error! ${err}`);
+//       });
+//   }
+// }
+
+function handleLikeButtonClick(card) {
+  api
+    .setLike(card._id, card.isLiked())
+    .then((res) => {
+      card.handleLikeIcon(res);
+    })
+    .catch((err) => {
+      alert(`Error! ${err}`);
+    });
+}
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                 EVENT LISTENERS                                ||
 // ! ||--------------------------------------------------------------------------------||
@@ -113,6 +178,12 @@ profileEditBtn.addEventListener("click", () => {
 addNewCardBtn.addEventListener("click", () => {
   formValidators["new-card-form"].resetValidation();
   addNewCardPopupForm.open();
+});
+
+// AVATAR UPDATE EVENT LISTENER
+avatarEditpencil.addEventListener("click", () => {
+  formValidators["update-avatar-form"].resetValidation();
+  updateAvatarPopupForm.open();
 });
 
 // ! ||--------------------------------------------------------------------------------||
@@ -167,6 +238,19 @@ editProfilePopupForm.setEventListeners();
 const previewImagePopup = new PopupWithImage("#previewImage-popup");
 previewImagePopup.setEventListeners();
 
+const updateAvatarPopupForm = new PopupWithForm(
+  "#edit-avatar-popup",
+  handleUpdateAvatarSubmit
+);
+updateAvatarPopupForm.setEventListeners();
+
+// ! ||--------------------------------------------------------------------------------||
+// ! ||                          INSTANCE DELETE CONFIRMATION                          ||
+// ! ||--------------------------------------------------------------------------------||
+
+const deleteConfirmationPopup = new DeleteConfirmation("#deleteConfirm-popup");
+deleteConfirmationPopup.setEventListeners();
+
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                               INSTANCE USER INFO                               ||
 // ! ||--------------------------------------------------------------------------------||
@@ -174,7 +258,6 @@ previewImagePopup.setEventListeners();
 const userInfo = new UserInfo({
   userNameSelector: profileTitle,
   userDescriptionSelector: profileDescription,
-  // avatarSelector:
 });
 
 // ! ||--------------------------------------------------------------------------------||

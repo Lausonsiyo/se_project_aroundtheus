@@ -73,7 +73,7 @@
               class="popup__form-input"
               placeholder="Name"
               type="text"
-              name="title"
+              name="name"
               minlength="2"
               maxlength="40"
               required
@@ -116,7 +116,7 @@
               class="popup__form-input"
               placeholder="Title"
               type="text"
-              name="title"
+              name="name"
               minlength="1"
               maxlength="40"
               required
@@ -160,7 +160,11 @@
     <template id="card-template">
       <li class="card">
         <img class="card__image" src="" alt="" />
-        <button class="card__delete-button" type="button"></button>
+        <button
+          class="card__delete-button"
+          id="card-delete-button"
+          type="button"
+        ></button>
         <div class="card__description">
           <h2 class="card__title"></h2>
           <button class="card__like-button" type="button"></button>
@@ -177,7 +181,14 @@
         ></button>
         <form name="deleteConfirm-form" class="popup__form">
           <p class="popup__heading">Delete Image?</p>
-          <button class="popup__button" type="submit" disabled>YES</button>
+          <button
+            class="popup__button"
+            id="delete-confirm-button"
+            type="submit"
+            disabled
+          >
+            YES
+          </button>
         </form>
       </div>
     </div>
@@ -189,18 +200,26 @@
           id="edit-avatar-close-button"
           type="button"
         ></button>
-        <form name="edita-avatar-form" class="popup__form">
+        <form name="update-avatar-form" class="popup__form">
           <p class="popup__heading">Change profile picture</p>
-          <input
-            id="new-avatar-link-input"
-            placeholder="Image link"
-            class="popup__form-input"
-            type="url"
-            name="link"
-            required
-          />
-          <span class="popup__error" id="new-image-title-input-error"></span>
-          <button class="popup__button" type="submit" disabled>Save</button>
+          <label class="popup__label">
+            <input
+              id="new-avatar-link-input"
+              placeholder="New avatar link"
+              class="popup__form-input"
+              type="url"
+              name="link"
+              required
+            />
+            <span class="popup__error" id="new-avatar-link-input-error"></span>
+          </label>
+          <button
+            class="popup__button popup__button_disabled"
+            type="submit"
+            disabled
+          >
+            Save
+          </button>
         </form>
       </div>
     </div>
