@@ -1,16 +1,16 @@
 class Card {
   constructor(
-    cardData,
+    data,
     cardElement,
     handlePreviewPicture,
     handleDeleteCardClick,
     handleLikeButtonClick
   ) {
-    this._name = cardData.name;
-    this._link = cardData.link;
+    this._name = data.name;
+    this._link = data.link;
 
-    this._isLiked = cardData._isLiked;
-    this._id = cardData._id;
+    this._isLiked = data.isLiked;
+    this._id = data._id;
 
     this._handlePreviewPicture = handlePreviewPicture;
     this._handleDeleteCardClick = handleDeleteCardClick;

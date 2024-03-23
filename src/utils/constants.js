@@ -29,6 +29,7 @@ export const profileDescription = document.querySelector(
   ".profile__description"
 );
 export const avatarEditpencil = document.querySelector("#edit-avatar-image");
+export const userAvatarImage = document.querySelector(".profile__image");
 
 export const cardListEl = document.querySelector(".cards__list");
 

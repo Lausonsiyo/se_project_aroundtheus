@@ -28,6 +28,7 @@ import {
   profileEditForm,
   addNewCardForm,
   avatarEditpencil,
+  userAvatarImage,
 } from "../utils/constants.js";
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                   FUNCTIONS;                                   ||
@@ -35,9 +36,9 @@ import {
 
 //RENDER CARD FUNCTION
 
-function createCard(item) {
+function createCard(cardData) {
   const card = new Card(
-    item,
+    cardData,
     cardTemplate,
     handlePreviewPicture,
     handleDeleteCardClick,
@@ -236,6 +237,7 @@ deleteConfirmationPopup.setEventListeners();
 const userInfo = new UserInfo({
   userNameSelector: profileTitle,
   userDescriptionSelector: profileDescription,
+  avatarSelector: userAvatarImage,
 });
 
 // ! ||--------------------------------------------------------------------------------||
