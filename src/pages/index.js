@@ -52,77 +52,50 @@ function createCard(cardData) {
 
 // EDIT AVATAR HANDLER
 
-// function handleUpdateAvatarSubmit(input) {
-//   api
-//     .updateAvatar(input.link)
-//     .then((res) => {
-//       userInfo.setAvatar(res.avatar);
-//       updateAvatarPopupForm.close();
-//     })
-//     .catch((err) => {
-//       alert(`Error! ${err}`);
-//     })
-//     .finally(() => updateAvatarPopupForm.renderloading());
-// }
-function handleUpdateAvatarSubmit(inputValues) {
-  // we create a function that returns a promise
+function handleUpdateAvatarSubmit(input) {
   function makeRequest() {
-    // `return` lets us use a promise chain `then, catch, finally` inside `handleSubmit`
-    return api.updateAvatar(inputValues).then((userData) => {
-      userInfo.setUserInfo(userData);
+    return api.updateAvatar(input.link).then((res) => {
+      userInfo.setAvatar(res.avatar);
     });
   }
-  // Here we call the function passing the request, popup instance and if we need some other loading text we can pass it as the 3rd argument
   handleSubmit(makeRequest, updateAvatarPopupForm);
 }
 
+// UNIVERSAL SUBMIT HANDLER
+
 function handleSubmit(request, popupInstance, loadingText = "Saving...") {
-  // here we change the button text
-  popupInstance.renderloading(true, loadingText);
+  popupInstance.renderLoading(true, loadingText);
   request()
     .then(() => {
-      // We need to close only in `then`
       popupInstance.close();
     })
-    // we need to catch possible errors
-    // console.error is used to handle errors if you don’t have any other ways for that
     .catch(console.error)
-    // in `finally` we need to return the initial button text back in any case
     .finally(() => {
       popupInstance.renderLoading(false);
     });
 }
 
 // PROFILE EDIT HANDLER
-
 function handleProfileEditSubmit(data) {
-  api
-    .updateUserInfo(data)
-    .then((res) => {
+  function makeRequest() {
+    return api.updateUserInfo(data).then((res) => {
       userInfo.setUserInfo(res);
-      editProfilePopupForm.close();
       formValidators["profile-edit-form"].resetValidation();
-    })
-    .catch((err) => {
-      alert(`Error! ${err}`);
-    })
-    .finally(() => editProfilePopupForm.renderloading());
+    });
+  }
+  handleSubmit(makeRequest, editProfilePopupForm);
 }
 
 // ADD NEW CARD HANDLER
 
 function handleAddNewCardSubmit(data) {
-  api
-    .addCard(data)
-    .then((card) => {
+  function makeRequest() {
+    return api.addCard(data).then((card) => {
       const newCard = createCard(card);
       sectionCard.addItem(newCard);
-      addNewCardPopupForm.close();
-    })
-    .catch((err) => {
-      alert(`Error! ${err}`);
-    })
-    .finally(() => addNewCardPopupForm.renderloading());
+    });
+  }
+  handleSubmit(makeRequest, addNewCardPopupForm);
 }
 
 // PREVIEW PICTURE HANDLER
@@ -136,21 +109,33 @@ function handlePreviewPicture(card) {
 function handleDeleteCardClick(card) {
   deleteConfirmationPopup.open();
   deleteConfirmationPopup.setDeleteConfirm(() => {
-    deleteConfirmationPopup.setDeleteLoading(true);
-    api
-      .deleteCard(card._id)
-      .then((result) => {
-        deleteConfirmationPopup.close();
+    function makeRequest() {
+      api.deleteCard(card._id).then((result) => {
         card.handleDeleteCard(result);
-      })
-      .catch((err) => {
-        alert(`Error! ${err}`);
-      })
-      .finally(() => {
-        deleteConfirmationPopup.setDeleteLoading(false);
       });
+    }
+    handleSubmit(makeRequest, deleteConfirmationPopup);
   });
 }
+
+// function handleDeleteCardClick(card) {
+//   deleteConfirmationPopup.open();
+//   deleteConfirmationPopup.setDeleteConfirm(() => {
+//     deleteConfirmationPopup.setDeleteLoading(true);
+//     api
+//       .deleteCard(card._id)
+//       .then((result) => {
+//         deleteConfirmationPopup.close();
+//         card.handleDeleteCard(result);
+//       })
+//       .catch((err) => {
+//         alert(`Error! ${err}`);
+//       })
+//       .finally(() => {
+//         deleteConfirmationPopup.setDeleteLoading(false);
+//       });
+//   });
+// }
 
 // LIKE HANDLER
 
