@@ -110,11 +110,11 @@ function handleDeleteCardClick(card) {
   deleteConfirmationPopup.open();
   deleteConfirmationPopup.setDeleteConfirm(() => {
     function makeRequest() {
-      api.deleteCard(card._id).then((result) => {
+      return api.deleteCard(card._id).then((result) => {
         card.handleDeleteCard(result);
       });
     }
-    handleSubmit(makeRequest, deleteConfirmationPopup);
+    handleSubmit(makeRequest, deleteConfirmationPopup, "Deleting...");
   });
 }
 
@@ -163,6 +163,13 @@ profileEditBtn.addEventListener("click", () => {
   formValidators["profile-edit-form"].resetValidation();
   editProfilePopupForm.open();
 });
+
+// profileEditBtn.addEventListener("click", () => {
+//   userInfo.getUserInfo();
+//   setInputValues(userInfo);
+//   formValidators["profile-edit-form"].resetValidation();
+//   editProfilePopupForm.open();
+// });
 
 // ADD NEW CARD LISTENER
 

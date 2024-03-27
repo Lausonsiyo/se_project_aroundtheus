@@ -7,11 +7,18 @@ export default class DeleteConfirmation extends Popup {
     this._submitButton = this._popupForm.querySelector(".popup__button");
   }
 
-  setDeleteLoading(loading) {
-    if (loading) {
-      this._submitButton.textContent = "Deleting";
+  // setDeleteLoading(loading) {
+  //   if (loading) {
+  //     this._submitButton.textContent = "Deleting";
+  //   } else {
+  //     this._submitButton.textContent = "YES";
+  //   }
+  // }
+  renderLoading(isLoading, loadingText = "Deleting...") {
+    if (isLoading) {
+      this._submitButton.textContent = loadingText;
     } else {
-      this._submitButton.textContent = "YES";
+      this._submitButton.textContent = this._submitbuttonText;
     }
   }
 
