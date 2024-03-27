@@ -52,40 +52,66 @@ function createCard(cardData) {
 
 // EDIT AVATAR HANDLER
 
-function handleUpdateAvatarSubmit(input) {
-  updateAvatarPopupForm.setLoading(true);
-  api
-    .updateAvatar(input.link)
-    .then((res) => {
-      userInfo.setAvatar(res.avatar);
-      updateAvatarPopupForm.close();
+// function handleUpdateAvatarSubmit(input) {
+//   api
+//     .updateAvatar(input.link)
+//     .then((res) => {
+//       userInfo.setAvatar(res.avatar);
+//       updateAvatarPopupForm.close();
+//     })
+//     .catch((err) => {
+//       alert(`Error! ${err}`);
+//     })
+//     .finally(() => updateAvatarPopupForm.renderloading());
+// }
+function handleUpdateAvatarSubmit(inputValues) {
+  // we create a function that returns a promise
+  function makeRequest() {
+    // `return` lets us use a promise chain `then, catch, finally` inside `handleSubmit`
+    return api.updateAvatar(inputValues).then((userData) => {
+      userInfo.setUserInfo(userData);
+    });
+  }
+  // Here we call the function passing the request, popup instance and if we need some other loading text we can pass it as the 3rd argument
+  handleSubmit(makeRequest, updateAvatarPopupForm);
+}
+
+function handleSubmit(request, popupInstance, loadingText = "Saving...") {
+  // here we change the button text
+  popupInstance.renderloading(true, loadingText);
+  request()
+    .then(() => {
+      // We need to close only in `then`
+      popupInstance.close();
     })
-    .catch((err) => {
-      alert(`Error! ${err}`);
-    })
-    .finally(() => editProfilePopupForm.setLoading(false));
+    // we need to catch possible errors
+    // console.error is used to handle errors if you don’t have any other ways for that
+    .catch(console.error)
+    // in `finally` we need to return the initial button text back in any case
+    .finally(() => {
+      popupInstance.renderLoading(false);
+    });
 }
 
 // PROFILE EDIT HANDLER
 
 function handleProfileEditSubmit(data) {
-  editProfilePopupForm.setLoading(true);
   api
     .updateUserInfo(data)
     .then((res) => {
       userInfo.setUserInfo(res);
       editProfilePopupForm.close();
+      formValidators["profile-edit-form"].resetValidation();
     })
     .catch((err) => {
       alert(`Error! ${err}`);
     })
-    .finally(() => editProfilePopupForm.setLoading(false));
+    .finally(() => editProfilePopupForm.renderloading());
 }
 
 // ADD NEW CARD HANDLER
 
 function handleAddNewCardSubmit(data) {
-  addNewCardPopupForm.setLoading(true);
   api
     .addCard(data)
     .then((card) => {
@@ -96,7 +122,7 @@ function handleAddNewCardSubmit(data) {
     .catch((err) => {
       alert(`Error! ${err}`);
     })
-    .finally(() => editProfilePopupForm.setLoading(false));
+    .finally(() => addNewCardPopupForm.renderloading());
 }
 
 // PREVIEW PICTURE HANDLER
@@ -138,6 +164,7 @@ function handleLikeButtonClick(card) {
       alert(`Error! ${err}`);
     });
 }
+
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                 EVENT LISTENERS                                ||
 // ! ||--------------------------------------------------------------------------------||
@@ -265,10 +292,7 @@ api
 api
   .getUserInfo()
   .then((info) => {
-    userInfo.setUserInfo({
-      userName: info.name,
-      userDescription: info.about,
-    });
+    userInfo.setUserInfo(info);
     userInfo.setAvatar(info.avatar);
   })
   .catch((err) => {
