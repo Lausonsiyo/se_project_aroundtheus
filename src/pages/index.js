@@ -80,7 +80,6 @@ function handleProfileEditSubmit(data) {
   function makeRequest() {
     return api.updateUserInfo(data).then((res) => {
       userInfo.setUserInfo(res);
-      formValidators["profile-edit-form"].resetValidation();
     });
   }
   handleSubmit(makeRequest, editProfilePopupForm);
@@ -118,25 +117,6 @@ function handleDeleteCardClick(card) {
   });
 }
 
-// function handleDeleteCardClick(card) {
-//   deleteConfirmationPopup.open();
-//   deleteConfirmationPopup.setDeleteConfirm(() => {
-//     deleteConfirmationPopup.setDeleteLoading(true);
-//     api
-//       .deleteCard(card._id)
-//       .then((result) => {
-//         deleteConfirmationPopup.close();
-//         card.handleDeleteCard(result);
-//       })
-//       .catch((err) => {
-//         alert(`Error! ${err}`);
-//       })
-//       .finally(() => {
-//         deleteConfirmationPopup.setDeleteLoading(false);
-//       });
-//   });
-// }
-
 // LIKE HANDLER
 
 function handleLikeButtonClick(card) {
@@ -163,13 +143,6 @@ profileEditBtn.addEventListener("click", () => {
   formValidators["profile-edit-form"].resetValidation();
   editProfilePopupForm.open();
 });
-
-// profileEditBtn.addEventListener("click", () => {
-//   userInfo.getUserInfo();
-//   setInputValues(userInfo);
-//   formValidators["profile-edit-form"].resetValidation();
-//   editProfilePopupForm.open();
-// });
 
 // ADD NEW CARD LISTENER
 
