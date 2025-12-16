@@ -1,5 +1,7 @@
 // COMPONENTS IMPORTS
+import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
+import Main from "../Main/Main";
 
 //STYLES IMPORTS
 import "./App.css";
@@ -8,11 +10,13 @@ import "./App.css";
 
 function App() {
   return (
-    <div>
-      <Header />
-      <main>
-        <p>This is the main content of the AroundTheUS application.</p>
-      </main>
+    <div className="page">
+      <div className="page__content">
+        <Header />
+        <Main />
+        <Footer />
+      </div>
+      {/* Overlay */}
     </div>
   );
 }

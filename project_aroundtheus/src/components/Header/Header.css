@@ -1,0 +1,13 @@
+.header {
+  border-bottom: rgba(84, 84, 84, 0.7);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  width: 880px;
+}
+
+.header__logo {
+  margin-top: 45px;
+  margin-bottom: 36px;
+  width: 173px;
+  height: 33px;
+}
