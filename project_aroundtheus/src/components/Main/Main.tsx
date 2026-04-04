@@ -1,5 +1,5 @@
 //STYLE IMPORTS
-import "./Main.css";
+import './Main.css';
 
 // MAIN COMPONENT
 function Main() {
